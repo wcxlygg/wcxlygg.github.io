@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robotics | Chunxiang Wang</title>
+    <link>https://luoyeguigenno1.github.io/tag/robotics/</link>
+      <atom:link href="https://luoyeguigenno1.github.io/tag/robotics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Robotics</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://luoyeguigenno1.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Robotics</title>
+      <link>https://luoyeguigenno1.github.io/tag/robotics/</link>
+    </image>
+    
+    <item>
+      <title>Zebrafish Larva Positioning System</title>
+      <link>https://luoyeguigenno1.github.io/project/zebrafish-larva-positioning-system/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://luoyeguigenno1.github.io/project/zebrafish-larva-positioning-system/</guid>
+      <description>&lt;p&gt;Positioning the larva inside a micropipette accurately and robustly plays a pivotal role in the transportation process. The objective of this system is to transfer a larva from one location to another and adjust its posture for micromanipulation, organ imaging, drug-specific phenotypic observation, etc. A well-known relevant system is &lt;a href=&#34;https://www.unionbio.com/vast/&#34;&gt;VAST BioImager&lt;/a&gt;, which is a modular and expandable platform that is convenient to integrate with many microscopes. A typical application of VAST BioImager is to model the skeleton bones of zebrafish larvae in a super fast speed of several seconds.&lt;/p&gt;
+
+&lt;p&gt;The setup and workflow of this system are illustrated as follows:
+&lt;figure&gt;&lt;img src=&#34;1.jpg&#34; alt=&#34;Device and schematic&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Calibration. Compute the transformation matrix with the gradient-descent-based parametric identification.
+&lt;figure&gt;&lt;img src=&#34;c1.jpg&#34; alt=&#34;c1&#34;&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;Detect the object, analyse its posture.&lt;/li&gt;
+&lt;li&gt;Drive the mechanical device to adjust the object to the ideal orientation.&lt;/li&gt;
+&lt;li&gt;Inhale the larva into the pipette and position it to the desired position.&lt;/li&gt;
+&lt;li&gt;The micromanipulator moves the pipette to the releasing position.&lt;/li&gt;
+&lt;li&gt;Release larva.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The difficulties include:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Abrupt motion in the process of aspiration or dispensing, as illustrated in the following video:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;1.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;&lt;/li&gt;
+&lt;li&gt;Sensitive dynamic characteristics when positioning the object, shown in the video below:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;2.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;&lt;/li&gt;
+&lt;li&gt;Difficulties for video tracking, including the abruptive motion, objects that are out of focus and blocked up, etc.
+&lt;figure&gt;&lt;img src=&#34;3.png&#34; alt=&#34;3&#34;&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To deal with the object’s abrupt motion, defocus, occlusion problems, a fast and reliable tracker is designed, achieving a processing velocity of over 100 frames per second and an locating accuracy within 5 pixels.&lt;/p&gt;
+
+&lt;p&gt;To model the background, an adapted Gaussian Mixture model is adopted, with equations as follows:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[p\left( {\vec x|{\chi _T},BG + FG} \right) = \sum\limits_{m = 1}^M {{\pi _m}} {\rm{N}}\left( {\vec x;\overrightarrow {{\mu _m}} ,\sigma _m^2*I} \right) \]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{array}{*{20}{c}}
+{\pi _m^\prime  = {\pi _m} + \alpha \left( {O_m^t - {\pi _m}} \right)}\\
+{\vec \mu _m^\prime  = {{\vec \mu }_m} + O_m^t\left( {\alpha /{\pi _m}} \right){{\vec \delta }_m}}\\
+{\sigma _m^{{2^\prime }} = \sigma _m^2 + O_m^t\left( {\alpha /{\pi _m}} \right)\left( {\vec \delta _m^T{\delta _m} - \sigma _m^2} \right)}
+\end{array}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;After that, subtract the frame from the background, and then the Otsu thresholding method, along with morphological operations, is performed to segment the whole contour. With the contour, the larval position is calculated, shown in the video below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;3.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;&lt;/p&gt;
+
+&lt;p&gt;To model this system, the force analysis is conducted as follows:
+&lt;figure&gt;&lt;img src=&#34;model.jpg&#34; alt=&#34;model&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{array}{*{20}{l}}
+{m{{\ddot x}_w} + b{{\dot x}_w} + G\sin \theta  = {P_0}{S_{pip}} - \frac{{{P_{air,0}}{V_{air,0}}}}{{{V_{air,0}} + u{S_{pis}} - {x_w}{S_{pip}}}}{S_{pip}}}\\
+{m{{\ddot x}_w} + b{{\dot x}_w} + G\sin \theta  = \frac{{{P_0}{S_{pip}}{V_{air,0}} + {P_0}{S_{pip}}{S_{pis}}u - {P_0}S_{pip}^2{x_w} - {P_{air,0}}{V_{air,0}}{S_{pip}}}}{{{V_{air,0}} + u{S_{pis}} - {x_w}{S_{pip}}}}}\\
+{m{{\ddot x}_w} + b{{\dot x}_w} + G\sin \theta  = \frac{{{P_0}{S_{pip}}{V_{air,0}} + {P_0}{S_{pip}}{S_{pis}}u - {P_0}S_{pip}^2{x_w} - {P_{air,0}}{V_{air,0}}{S_{pip}}}}{{{V_{air,0}}}}}\\
+{m{{\ddot x}_w} + b{{\dot x}_w} + \frac{{{P_0}S_{pip}^2}}{{{V_{air,0}}}}{x_w} + G\sin \theta  = \frac{{{P_0}{S_{pip}}{S_{pis}}}}{{{V_{air,0}}}}u + \left( {{P_0} - {P_{air,0}}} \right){S_{pip}}}
+\end{array}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Build the dynamic model:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{array}{*{20}{l}}
+{m\ddot x + K\ddot x + \frac{K}{b}\frac{{{P_0}S_{pip}^2}}{{{V_{air,0}}}}\left( {\frac{{m\ddot x + G\sin \theta }}{K} + \dot x} \right) = \frac{{K{P_0}{S_{pp}}{S_{pis}}}}{{b{V_{air,0}}}}u}\\
+{m\ddot x + K\ddot x + \frac{K}{b}\frac{{{P_0}S_{pip}^2}}{{{V_{air,0}}}}\frac{m}{K}\ddot x + \frac{K}{b}\frac{{{P_0}S_{pip}^2}}{{{V_{air,0}}}}\frac{{G\sin \theta }}{K} + \frac{K}{b}\frac{{{P_0}S_{pip}^2}}{{{V_{air,0}}}}\dot x = \frac{{K{P_0}{S_{pip}}{S_{pis}}}}{{b{V_{air,0}}}}u}\\
+{m\ddot x + \left( {\frac{{m{P_0}S_{pp}^2}}{{b{V_{air,0}}}} + K} \right)\ddot x + \frac{{K{P_0}S_{pip}^2}}{{b{V_{air,0}}}}\dot x + \frac{{{P_0}S_{pip}^2G\sin \theta }}{{b{V_{ijr,0}}}} = \frac{{K{P_0}{S_{pip}}{S_{pis}}}}{{b{V_{air,0}}}}u}
+\end{array}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Abbreviate it in the fllowing form:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[{a_1}\ddot x + {a_2}\ddot x + {a_3}\dot x + {a_4} = bu\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The parameters of the dynamic model are identified by the frequency response test, after which the PID control algorithm is desinged, achieving the following control effect:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;4.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;&lt;/p&gt;
+
+&lt;p&gt;This system manages to position a larva to a desired position in the inclined micropipette for larva transfer and manipulation, which could hardly be achieved manually. Presently, the PID control effect is not optimal for larvae with different ages. Thus, I have been working on using the Adaptive Robust control to enhance the control performance, and extend its application to other organisms, such as embryo. I plan to write a paper and submit it to IEEE Transactions on Automation Science and Engineering.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Supervisor: Prof. &lt;a href=&#34;https://scholar.google.com.hk/citations?user=2DdpHLEAAAAJ&amp;amp;hl&#34;&gt;Huijun Gao&lt;/a&gt;,  IEEE Fellow and Professor of Department of Automation, Harbin Institute of Technology&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Zebrafish Larva Morphology Analysis</title>
+      <link>https://luoyeguigenno1.github.io/project/zebrafish-larvae-morphology-analysis/</link>
+      <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://luoyeguigenno1.github.io/project/zebrafish-larvae-morphology-analysis/</guid>
+      <description>&lt;p&gt;The capability to directly deliver agent into the heart inside a single vertebrate is important for understanding organs activities, tissues regeneration, and developing disease models and therapeutic approaches. Despite recent success in exploiting robots to perform injection of cells, embryos, and small animals, it remains challenging to automatically achieve intracardial agent injection due to its inaccessible position, inappropriate immobilization force, and inaccurate localization. Here my labortory develops a high-throughput in vivo heart injection system which enables intracardial agent delivery of a single zebrafish larva in less than fifty seconds. This system not only consistently orients the zebrafish to a pre-designed posture but also provides a controllable capture and injection technique to regulate the deformative injury. Horizontal projection and space height of zebrafish heart are determined with micrometer resolution. To illustrate the power of our system, we have injected several classes of agents and analyzed the results which correlate well with known mechanisms of actions in mammals.&lt;/p&gt;
+&lt;p&gt;This video illustrates the workflow of the algorithm here (updated in 07/2019):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;workflow.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;&lt;/p&gt;
+&lt;p&gt;The device and schematic of the micromanipulation system is shown in the following picture.
+&lt;img src=&#34;1.jpg&#34; alt=&#34;Device and schematic&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The objective of zebrafish larva morphology analysis algorithm is to&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;detect the larval posture;&lt;/li&gt;
+&lt;li&gt;extract its orientation and belly direction;&lt;/li&gt;
+&lt;li&gt;give visual feedback to the mechanical device to rotate the object to the desired posture;&lt;/li&gt;
+&lt;li&gt;calculate the inhaling position and drive the manipulator to capture the object.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The difficulties inlude&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;uneven illumination;&lt;/li&gt;
+&lt;li&gt;noise distractions, such as bubbles, excretion, and small particles, which could cause troubles for extracting the contour of the object;&lt;/li&gt;
+&lt;li&gt;morphological variations for different objects with various ages, sizes, contours;&lt;/li&gt;
+&lt;li&gt;requirements for high processing speed, which means the visual feedback algorithm needs to achive a bandwith of at least 40 fps.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This algorithm used a range of traditional image processing techniques to achieve robust, accurate, and fast morphology analysis. The workflow is illustrated as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;2.jpg&#34; alt=&#34;Workflow&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select the region of interest (ROI)&lt;/li&gt;
+&lt;li&gt;Denoise with Gaussian filter and Gaussian filter and Gaussian bilateral filter, where the point is how to cancel the noise without eroding the contour. Confronted with this difficulty, I combine two types of filter.&lt;/li&gt;
+&lt;li&gt;Adaptive thresholding to extract the foreground while address the uneven illumination.&lt;/li&gt;
+&lt;li&gt;Median filterring and contour extraction.&lt;/li&gt;
+&lt;li&gt;Cut the contour into two parts, compare the curvatures of each one to determine the belly side.&lt;/li&gt;
+&lt;li&gt;Calculate the direction and the degree needed to rotate the object to the desired posture.&lt;/li&gt;
+&lt;li&gt;The mechanical device, a stepper motor, drives the object into the ultimate position with P control.&lt;/li&gt;
+&lt;li&gt;Reach the desired podture.&lt;/li&gt;
+&lt;li&gt;Adaptive thresholding.&lt;/li&gt;
+&lt;li&gt;Median filterring.&lt;/li&gt;
+&lt;li&gt;Contour extraction.&lt;/li&gt;
+&lt;li&gt;Calculate the inhaling position, painted in a red point.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This algorithms achieves&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;success rate: 98% for larvae aged between 1 dpf to 4 dpf.&lt;/li&gt;
+&lt;li&gt;accracy: &amp;lt;3 deg.(orientation) &amp;lt;5 pixels (inhaling point)&lt;/li&gt;
+&lt;li&gt;bandwidth: &amp;gt;40 fps&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It works effectively for larvae aged between 1 to 4 dpf with various morphological features.
+Furthermore, this project has applied for 4 patents.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Supervisor: Prof. &lt;a href=&#34;https://scholar.google.com.hk/citations?user=2DdpHLEAAAAJ&amp;amp;hl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Huijun Gao&lt;/a&gt;,  IEEE Fellow and Professor of Department of Automation, Harbin Institute of Technology&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
