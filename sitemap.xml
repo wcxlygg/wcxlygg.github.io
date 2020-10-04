@@ -178,28 +178,33 @@
   </url>
   
   <url>
-    <loc>https://luoyeguigenno1.github.io/post/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
+    <loc>https://luoyeguigenno1.github.io/post/kalimba/</loc>
+    <lastmod>2019-10-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://luoyeguigenno1.github.io/post/writing-technical-content/</loc>
-    <lastmod>2019-07-12T00:00:00+00:00</lastmod>
+    <loc>https://luoyeguigenno1.github.io/categories/</loc>
+    <lastmod>2019-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://luoyeguigenno1.github.io/tag/kalimba/</loc>
+    <lastmod>2019-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://luoyeguigenno1.github.io/category/kalimba/</loc>
+    <lastmod>2019-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://luoyeguigenno1.github.io/post/</loc>
+    <lastmod>2019-10-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://luoyeguigenno1.github.io/courses/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/author/chunxiang-wang/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/post/jupyter/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -218,38 +223,7 @@
   </url>
   
   <url>
-    <loc>https://luoyeguigenno1.github.io/tag/academic/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/post/getting-started/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/categories/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/category/demo/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/tag/%E5%BC%80%E6%BA%90/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luoyeguigenno1.github.io/category/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
+    <loc>https://luoyeguigenno1.github.io/author/chunxiang-wang/</loc>
   </url>
   
 </urlset>
